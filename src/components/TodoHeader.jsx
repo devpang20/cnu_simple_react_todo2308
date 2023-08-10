@@ -1,6 +1,6 @@
 function TodoHeader() {
     return ( 
-        <>헤더 컴포넌트 ,</>
+        <h1>리액트 투두 만들기</h1>
      );
 }
 

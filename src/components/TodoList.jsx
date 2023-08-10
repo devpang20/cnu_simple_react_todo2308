@@ -1,5 +1,9 @@
-function TodoList() {
-    return ( <>투두리스트 컴포넌트</> );
+function TodoList({todos}) {
+    return ( 
+        <ul>
+            {todos.map(todo => <li>{todo.text}</li>)}
+        </ul>
+    );
 }
 
 export default TodoList;
