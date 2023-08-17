@@ -10,25 +10,30 @@ function App() {
     {
       id: 1,
       text: "할일1",
+      checked: true
     },
     {
       id: 2,
       text: "할일2",
+      checked: true
     },
     {
       id: 3,
       text: "할일3",
+      checked: false
     }, 
   ])
 
   let lastId = useRef(todos[todos.length -1].id)
 
+  // 할일 등록
   const onInsert = (text) => {
     setTodos(
       todos.concat([
         {
           id: lastId.current + 1,
           text: text,
+          checked: false
         }
       ])
     )
@@ -41,12 +46,24 @@ function App() {
     setTodos(nextState)
   }
 
+  // 할일 여부 체크
+  const onToggle = (id) => {
+    const nextState = todos.map(todo => 
+      todo.id === id ? { ...todo, checked: !todo.checked } : todo
+    )
+    setTodos(nextState)
+  }
+
   // view
   return (
     <div>
       <TodoHeader />
       <TodoForm onInsert={onInsert} />
-      <TodoList todos={todos} onDelete={onDelete} />
+      <TodoList 
+        todos={todos} 
+        onDelete={onDelete} 
+        onToggle={onToggle} 
+      />
     </div>
   )
 }
