@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import TodoForm from "./components/TodoForm"
 import TodoHeader from "./components/TodoHeader"
 import TodoList from "./components/TodoList"
@@ -21,14 +21,18 @@ function App() {
     }, 
   ])
 
+  let lastId = useRef(todos[todos.length -1].id)
+
   const onInsert = (text) => {
     setTodos(
       todos.concat([
         {
+          id: lastId.current + 1,
           text: text,
         }
-    ])
+      ])
     )
+    lastId.current++;
   }
 
   // 할일 삭제
@@ -41,7 +45,7 @@ function App() {
   return (
     <div>
       <TodoHeader />
-      <TodoForm onInsert={onInsert}/>
+      <TodoForm onInsert={onInsert} />
       <TodoList todos={todos} onDelete={onDelete} />
     </div>
   )
